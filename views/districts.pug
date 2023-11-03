@@ -1,0 +1,24 @@
+extends layout
+
+block content
+  h1= title
+  .container-fluid
+    .row
+      - 
+        let results = [
+          { name: "District 1", district_name: "Coimbatore", district_population: 3009000, district_direction: "North", district_area: 1824 },
+          { name: "District 2", district_name: "Madurai", district_population: 1834000, district_direction: "South", district_area: 1432 },
+          { name: "District 3", district_name: "Tiruchirappalli", district_population: 2722290, district_direction: "South-Eastern", district_area: 1700 }
+        ]
+      each item, index in results
+        .col-sm-2(onclick=`buy(${index})`)
+          div name: #{item.name}
+          div district_name: #{item.district_name}
+          div district_population: #{item.district_population}
+          div district_direction: #{item.district_direction}
+          div district_area: #{item.district_area}
+
+  script.
+    function buy(index) {
+      alert(`You purchased item ${index}.`)
+    }
