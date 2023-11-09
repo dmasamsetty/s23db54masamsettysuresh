@@ -3,12 +3,28 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var districts = require("./models/districts");
+
+require('dotenv').config();
+const connectionString = process.env.MONGO_CON
+mongoose = require('mongoose');
+mongoose.connect('mongodb+srv://dimpleMongo:DimpleMongo6007@atlascluster.4uvk4ww.mongodb.net/?retryWrites=true&w=majority');
+
+//Get the default connection
+var db = mongoose.connection;
+//Bind connection to error event
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.once("open", function(){
+console.log("Connection to DB succeeded")});
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var districtsRouter = require('./routes/districts');
 var boardRouter = require('./routes/board');
 var chooseRouter = require('./routes/choose');
+var resourceRouter = require('./routes/resource');
+
+
 
 
 var app = express();
@@ -28,6 +44,7 @@ app.use('/users', usersRouter);
 app.use('/districts', districtsRouter);
 app.use('/board', boardRouter);
 app.use('/choose', chooseRouter);
+app.use('/resource', resourceRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
@@ -43,5 +60,42 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+// We can seed the collection if needed on server start
+async function recreateDB(){
+// Delete everything
+await districts.deleteMany();
+let instance1 = new
+districts({district_name:"Coimbatore", district_population:3009000,
+district_direction:"North",district_area:1824});
+instance1.save().then(doc=>{
+console.log("First object saved")}
+).catch(err=>{
+console.error(err)
+});
+
+let instance2 = new
+districts({district_name:"Madurai", district_population:1834000,
+district_direction:"South",district_area:1432});
+instance2.save().then(doc=>{
+console.log("second object saved")}
+).catch(err=>{
+console.error(err)
+});
+
+let instance3 = new
+districts({district_name:"Tiruchirappalli", district_population:2722290,
+district_direction:"South-Eastern",district_area:1700});
+instance3.save().then(doc=>{
+console.log("third object saved")}
+).catch(err=>{
+console.error(err)
+});
+
+
+}
+let reseed = true;
+if (reseed) {recreateDB();}
+
 
 module.exports = app;
