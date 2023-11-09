@@ -18,6 +18,7 @@ exports.district_create_post = async function(req, res) {
     document.district_name = req.body.district_name;
     document.district_population = req.body.district_population;
     document.district_direction = req.body.district_direction;
+    document.district_area = req.body.district_area;
     try{
     let result = await document.save();
     res.send(result);
