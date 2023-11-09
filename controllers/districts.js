@@ -19,3 +19,15 @@ res.send('NOT IMPLEMENTED: District delete DELETE ' + req.params.id);
 exports.district_update_put = function(req, res) {
 res.send('NOT IMPLEMENTED: District update PUT' + req.params.id);
 };
+
+// List of all Costumes
+exports.district_list = async function(req, res) {
+    try{
+    theDistricts = await Districts.find();
+    res.send(theDistricts);
+    }
+    catch(err){
+    res.status(500);
+    res.send(`{"error": ${err}}`);
+    }
+    };
