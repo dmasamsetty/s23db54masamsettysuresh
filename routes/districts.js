@@ -1,9 +1,6 @@
 var express = require('express');
+const district_controlers= require('../controllers/districts');
 var router = express.Router();
-
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('districts', { title: 'Search Results Districts' });
-});
-
+/* GET costumes */
+router.get('/', district_controlers.district_view_all_Page );
 module.exports = router;

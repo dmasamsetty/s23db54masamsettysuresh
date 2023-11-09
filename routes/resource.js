@@ -8,13 +8,13 @@ var district_controller = require('../controllers/districts');
 router.get('/', api_controller.api);
 /// district ROUTES ///
 // POST request for creating a district.
-router.post('/district', district_controller.district_create_post);
+router.post('/districts', district_controller.district_create_post);
 // DELETE request to delete district.
-router.delete('/district/:id', district_controller.district_delete);
+router.delete('/districts/:id', district_controller.district_delete);
 // PUT request to update district.
-router.put('/district/:id', district_controller.district_update_put);
+router.put('/districts/:id', district_controller.district_update_put);
 // GET request for one district.
-router.get('/district/:id', district_controller.district_detail);
+router.get('/districts/:id', district_controller.district_detail);
 // GET request for list of all district items.
-router.get('/district', district_controller.district_list);
+router.get('/districts', district_controller.district_list);
 module.exports = router;
