@@ -3,11 +3,18 @@ var District = require('../models/districts');
 exports.district_list = function(req, res) {
 res.send('NOT IMPLEMENTED: District list');
 };
-// for a specific District.
-exports.district_detail = function(req, res) {
-res.send('NOT IMPLEMENTED: District detail: ' + req.params.id);
-};
-// Handle Costume create on POST.
+// for a specific Costume.
+exports.district_detail = async function(req, res) {
+    console.log("detail" + req.params.id)
+    try {
+    result = await District.findById( req.params.id)
+    res.send(result)
+    } catch (error) {
+    res.status(500)
+    res.send(`{"error": document for id ${req.params.id} not found`);
+    }
+    };
+    // Handle Costume create on POST.
 exports.district_create_post = async function(req, res) {
     console.log(req.body)
     let document = new District();
@@ -32,9 +39,27 @@ exports.district_create_post = async function(req, res) {
 exports.district_delete = function(req, res) {
 res.send('NOT IMPLEMENTED: District delete DELETE ' + req.params.id);
 };
-// Handle District update form on PUT.
-exports.district_update_put = function(req, res) {
-res.send('NOT IMPLEMENTED: District update PUT' + req.params.id);
+//Handle Costume update form on PUT.
+exports.district_update_put = async function(req, res) {
+console.log(`update on id ${req.params.id} with body
+${JSON.stringify(req.body)}`)
+try {
+let toUpdate = await District.findById( req.params.id)
+// Do updates of properties
+if(req.body.district_name) toUpdate.district_name = req.body.district_name;
+if(req.body.district_population) toUpdate.district_population = req.body.district_population;
+if(req.body.district_direction) toUpdate.district_direction = req.body.district_direction;
+if(req.body.district_area) toUpdate.district_area = req.body.district_area;
+if(req.body.checkboxsale) toUpdate.checkboxsale = true;
+else toUpdate.checkboxsale = false;
+let result = await toUpdate.save();
+console.log("Sucess " + result)
+res.send(result)
+} catch (err) {
+res.status(500)
+res.send(`{"error": ${err}: Update for id ${req.params.id}
+failed`);
+}
 };
 
 // List of all Costumes
