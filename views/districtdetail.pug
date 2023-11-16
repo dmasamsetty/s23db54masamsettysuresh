@@ -9,19 +9,19 @@ block content
   - let districtdirection = toShow.district_direction
   - let districtarea = toShow.district_area
 
-  div
-    div.row
+  div(style='border: 1px solid #ccc; padding: 10px; border-radius: 5px; margin-top: 20px;')
+    div.row(style='background-color: #f2f2f2; padding: 10px; border-bottom: 1px solid #ccc;')
       div(class='districtAttr mr-3') District ID is:
-      div #{districtid}
-    div.row
+      div(style='color: #333; font-weight: bold;') #{districtid}
+    div.row(style='background-color: #fff; padding: 10px; border-bottom: 1px solid #ccc;')
       div(class='districtAttr mr-3') District name is:
-      div #{districtname}
-    div.row
+      div(style='color: #333; font-weight: bold;') #{districtname}
+    div.row(style='background-color: #f2f2f2; padding: 10px; border-bottom: 1px solid #ccc;')
       div(class='districtAttr mr-3') District population is:
-      div #{districtpopulation}
-    div.row
+      div(style='color: #333; font-weight: bold;') #{districtpopulation}
+    div.row(style='background-color: #fff; padding: 10px; border-bottom: 1px solid #ccc;')
       div(class='districtAttr mr-3') District direction is:
-      div #{districtdirection}
-    div.row
+      div(style='color: #333; font-weight: bold;') #{districtdirection}
+    div.row(style='background-color: #f2f2f2; padding: 10px;')
       div(class='districtAttr mr-3') District area is:
-      div #{districtarea}
+      div(style='color: #333; font-weight: bold;') #{districtarea}
