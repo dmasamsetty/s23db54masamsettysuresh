@@ -11,3 +11,5 @@ router.get('/districts/:id', district_controlers.district_detail);
 router.get('/detail', district_controlers.district_view_one_Page);
 /* GET create costume page */
 router.get('/create', district_controlers.district_create_Page);
+/* GET create update page */
+router.get('/update', district_controlers.district_update_Page);

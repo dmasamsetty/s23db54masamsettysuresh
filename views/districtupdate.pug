@@ -1,0 +1,49 @@
+extends layout
+
+block content
+  h1= title
+  - let costumeid = toShow._id
+  - let district_name = toShow.district_name
+  - let district_population = toShow.district_population
+  - let district_direction = toShow.district_direction
+  - let district_area = toShow.district_area
+
+  div.row(class='mb-2')
+    div.mr-1 ID is
+    div #{costumeid}
+  
+  - let actionid = "/resource/districts/" + costumeid
+
+  form(id='CostumeForm', action= actionid, method="PUT")
+    div.form-group
+      label.districtAttr(for='district_name') District name
+      input#district_name(type='text', name='district_name', value=district_name)
+    div.form-group
+      label.districtAttr(for='district_population') District population
+      input#district_population(type='number', name='district_population', value=district_population)
+    div.form-group
+      label.districtAttr(for='district_direction') District direction
+      input#district_direction(type='text', name='district_direction', value=district_direction)
+    div.form-group
+      label.districtAttr(for='district_area') District area
+      input#district_area(type='number', name='district_area', value=district_area)
+    
+    input(type="submit")
+
+  script.
+    document.forms['CostumeForm'].addEventListener('submit', (event) => {
+      event.preventDefault();
+      // TODO do something here to show user that form is being submitted
+      fetch(event.target.action, {
+        method: 'PUT',
+        body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+      }).then((resp) => {
+        return resp.json(); // or resp.text() or whatever the server sends
+      }).then((body) => {
+        alert("Update succeeded");
+        // TODO handle body
+      }).catch((error) => {
+        // TODO handle error
+        alert("Update failed " + error);
+      });
+    });
