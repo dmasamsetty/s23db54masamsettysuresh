@@ -7,3 +7,7 @@ module.exports = router;
 
 // GET request for one costume.
 router.get('/districts/:id', district_controlers.district_detail);
+/* GET detail costume page */
+router.get('/detail', district_controlers.district_view_one_Page);
+/* GET create costume page */
+router.get('/create', district_controlers.district_create_Page);

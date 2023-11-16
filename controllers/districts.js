@@ -35,10 +35,18 @@ exports.district_create_post = async function(req, res) {
     res.send(`{"error": ${err}}`);
     }
     };
-// Handle District delete form on DELETE.
-exports.district_delete = function(req, res) {
-res.send('NOT IMPLEMENTED: District delete DELETE ' + req.params.id);
-};
+// Handle Costume delete on DELETE.
+exports.district_delete = async function(req, res) {
+    console.log("delete " + req.params.id)
+    try {
+    result = await District.findByIdAndDelete( req.params.id)
+    console.log("Removed " + result)
+    res.send(result)
+    } catch (err) {
+    res.status(500)
+    res.send(`{"error": Error deleting ${err}}`);
+    }
+    };
 //Handle Costume update form on PUT.
 exports.district_update_put = async function(req, res) {
 console.log(`update on id ${req.params.id} with body
@@ -84,5 +92,32 @@ exports.district_view_all_Page = async function(req, res) {
     catch(err){
     res.status(500);
     res.send(`{"error": ${err}}`);
+    }
+    };
+    // Handle a show one view with id specified by query
+exports.district_view_one_Page = async function(req, res) {
+    console.log("single view for id " + req.query.id)
+    try{
+    result = await District.findById( req.query.id)
+    res.render('districtdetail',
+    { title: 'District Detail', toShow: result });
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+    };
+
+// Handle building the view for creating a costume.
+// No body, no in path parameter, no query.
+// Does not need to be async
+exports.district_create_Page = function(req, res) {
+    console.log("create view")
+    try{
+    res.render('districtcreate', { title: 'District Create'});
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
     }
     };
