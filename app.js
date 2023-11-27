@@ -60,6 +60,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
 //Highlighted code
 app.use(require('express-session')({
   secret: 'keyboard cat',
@@ -76,6 +77,10 @@ app.use('/districts', districtsRouter);
 app.use('/board', boardRouter);
 app.use('/choose', chooseRouter);
 app.use('/resource', resourceRouter);
+var Account =require('./models/account');
+passport.use(new LocalStrategy(Account.authenticate()));
+passport.serializeUser(Account.serializeUser());
+passport.deserializeUser(Account.deserializeUser());
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
