@@ -12,7 +12,7 @@ block content
           div district_population: #{item.district_population}
           div district_direction: #{item.district_direction}
           div district_area: #{item.district_area}
-          - let destination = `dispatch("/costumes/update?id=${item._id}")`
+          - let destination = `dispatch("/districts/update?id=${item._id}")`
           button.btn(class="btn-primary ml-1", onclick=destination) Update
 
   script.
