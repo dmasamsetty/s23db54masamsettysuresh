@@ -2,6 +2,7 @@ extends layout
 
 block content
   h1= title
+  a.btn.btn-success(href='/districts/create') Create New District
   .container-fluid
     .row
       - let result = results
@@ -14,6 +15,10 @@ block content
           div district_area: #{item.district_area}
           - let destination = `dispatch("/districts/update?id=${item._id}")`
           button.btn(class="btn-primary ml-1", onclick=destination) Update
+          - let detail = `/districts/detail?id=${item._id}`
+          button.btn(class="btn-info ml-1", onclick=`dispatch("${detail}")`) Detail
+          - let del = `/districts/delete?id=${item._id}`
+          button.btn(class="btn-danger ml-1", onclick=`dispatch("${del}")`) Delete
 
   script.
     function buy(index) {

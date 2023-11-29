@@ -8,7 +8,12 @@ const districtSchema = mongoose.Schema({
       },
     district_population: Number,
     district_direction: String,
-    district_area:Number
+    district_area: {
+        type: Number,
+        required: true,
+        minlength: 0,    
+        maxlength: 1900,  
+      }
 })
 module.exports = mongoose.model("districts",
 districtSchema)
